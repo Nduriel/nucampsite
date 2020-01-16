@@ -75,7 +75,6 @@ function About(props) {
         </div>
     );
 
-
 }
 function RenderPartner({ partner }) {
     if (partner) {
