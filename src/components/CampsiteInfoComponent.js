@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import {
-    Label, Modal, ModalBody, ModalHeader,
+import { Label, Modal, ModalBody, ModalHeader,
     Button, Card, CardImg, CardText, CardBody,
     Breadcrumb, BreadcrumbItem
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
-import { Row } from 'reactstrap';
 import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 const maxLength = len => val => !val || (val.length <= len);
 const minLength = len => val => val && (val.length >= len);
@@ -15,7 +14,7 @@ const minLength = len => val => val && (val.length >= len);
 function RenderCampsite({ campsite }) {
     return (<div className="col-md-5 m-1">
         <Card>
-            <CardImg top src={campsite.image} alt={campsite.name} />
+            <CardImg top src={baseUrl + campsite.image} alt={campsite.name} />
             <CardBody>
                 <CardText>{campsite.description}</CardText>
             </CardBody>
@@ -82,9 +81,6 @@ class CommentForm extends Component {
                     <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
                     <ModalBody>
                         <LocalForm onSubmit={values => this.handleSubmit(values)}>
-                            <Row className="form-group">
-
-                            </Row>
                             <div className="form-group">
                                 <Label htmlFor="rating" md={2}>Rating</Label>
                                 <Control.select model=".rating" name="rating"

@@ -1,0 +1,1 @@
+export const baseUrl = 'http://localjost:3001/';
