@@ -16,3 +16,4 @@ export const Campsites = (state = {
             return state;
     }
 };
+

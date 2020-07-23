@@ -1,18 +1,43 @@
-import React from 'react';
+
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { PARTNERS } from '../shared/partners';
+import { Loading } from './LoadingComponent';
+import React from 'react';
+import { Fade, Stagger } from 'react-animation-components';
 
 
-function About(props) {
+function PartnerList(props) {
 
     const partners = props.partners.map(partner => {
         return (
-            <Media tag="li" key={partner.id}>
-                <RenderPartner partner={partner} />
-            </Media>
+            <Fade key={partner.id}>
+                <Media tag="li" >
+                    <Stagger>
+                        <RenderPartner partner={partner} />
+                    </Stagger>
+                </Media>
+            </Fade>
         );
-    });
+    })
+    if (props.isLoading) {
+        return (<Loading />);
+    }
+    if (props.errMess) {
+        return (
+            <div className="col">{props.errMess}</div>);
+    }
+    return (
+        <div className="col mt-4">
+            <Fade list>
+                <Stagger partners={partners} />
+            </Fade>
+        </div>
+    )
+
+}
+function About(props) {
+
+
 
     return (
         <div className="container">
@@ -66,11 +91,7 @@ function About(props) {
                 <div className="col-12">
                     <h3>Community Partners</h3>
                 </div>
-                <div className="col mt-4">
-                    <Media list>
-                        {partners}
-                    </Media>
-                </div>
+                <PartnerList partners={props.partners} />
             </div>
         </div>
     );
@@ -89,7 +110,7 @@ function RenderPartner({ partner }) {
             </React.Fragment>
         );
     }
-    return<div />;
-   
+    return <div />;
+
 }
 export default About;
